@@ -65,7 +65,7 @@ public class DLB {
     }
 
     private int finishpredictions(DLBNode curr, String[] possiblewords, int length) {
-        if (length < MAX_PREDICTIONS) {
+        if (length < MAX_PREDICTIONS && curr.getKey() != emptyfield) {
             if (curr.isFullWord()) {
                 possiblewords[length] = curr.getFullString();
                 length += 1;
@@ -82,6 +82,7 @@ public class DLB {
                     return length;
                 }
             }
+			return length;
         }
         return length;
     }
