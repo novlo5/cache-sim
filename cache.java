@@ -11,15 +11,11 @@ public class cache{
 	private int latency; // access latency in each level
 	private cache_block[][] cache_array;
 	private dll[] LRU;
-	//private int cache_hit = 0;
-	//private int cache_miss = 0;
-	//private int cache_access = 0;
 
 	public cache(int assoc, int rpolicy, int cache_size, int latency, int blocksize){
 
         this.assoc = assoc;
         this.rpolicy = rpolicy;
-       // this.sizelayers = cache_size;
         this.latency = latency;
 		this.blocksize = blocksize;
 
@@ -184,7 +180,6 @@ public boolean write_cache(int address, int data, cache mem, cache[] levels){
 		  int index = calc_index(address, this.numsets, this.blocksize);
 		  int tag = calc_tag(address, this.numsets, this.blocksize);
 	  do{
-		  //System.out.println(index);
 			  for(int i = 0; i < mem.assoc - 1; i++){
 				  if(mem.cache_array[index][i].tag == tag && mem.cache_array[index][i].valid == true){ //if tag and valid its a write hit
 						  if(mem.rpolicy == 0 && mem.cache_array[index][i].dirty == true || mem.rpolicy == 1){ //if it is dirty or write through cache write to higher levels
